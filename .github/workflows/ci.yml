@@ -30,11 +30,13 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build and push Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/solecode:latest
+      run: |
+        echo "step Build"
+        docker build -t gedharizka/parking-app:latest .
+        docker push gedharizka/parking-app:latest
+        echo "==== Success ===="
+        
+      
 
     - name: Log out from DockerHub
       run: docker logout
