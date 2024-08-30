@@ -14,7 +14,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
- checkout:
+ build:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,33 +32,9 @@ jobs:
     - name: Build and push Docker image
       run: |
         echo "step Build"
-        docker build -t gedharizka/parking-app:latest .
-        docker push gedharizka/parking-app:latest
+        docker build -t gedharizka/parking-app:0.0.2 .
+        docker push gedharizka/parking-app:0.0.2
         echo "==== Success ===="
-    - name: Log out from DockerHub
-      run: docker logout
-
-  docker_setup:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-
-    - name: Login to DockerHub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-  docker_build:
-    runs-on: ubuntu-latest
-    
-    - name: Build and push Docker image
-      run: |
-        echo "step Build"
-        docker build -t gedharizka/parking-app:latest .
-        docker push gedharizka/parking-app:latest
-        echo "==== Success ===="
+        
     - name: Log out from DockerHub
       run: docker logout
