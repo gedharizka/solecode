@@ -56,7 +56,7 @@ exports.addVehicle = (req, res) => {
 };
 
 exports.getParkedVehicles = (req, res) => {
-    const query = 'SELECT  id, license_plate, entry_time, exit_time, is_parked FROM vehicles WHERE is_parked = true ORDER BY id DESC';
+    const query = 'SELECT  id, license_plate, entry_time, exit_time, is_parked, total_fee FROM vehicles WHERE is_parked = true ORDER BY id DESC';
     connection.query(query, (err, results) => {
         if (err) {
             return res.status(500).send(err);
@@ -68,7 +68,8 @@ exports.getParkedVehicles = (req, res) => {
                 license_plate: vehicle.license_plate,
                 entry_time: moment(vehicle.entry_time).format("DD-MM-YYYY HH:mm:ss"),
                 exit_time: vehicle.exit_time ? moment(vehicle.exit_time).format("DD-MM-YYYY HH:mm:ss") : "-",
-                is_parked: vehicle.is_parked
+                is_parked: vehicle.is_parked === 1 ?  "Parked" : "Has left",
+                total_fee: `Rp ${formatNumber(vehicle.total_fee)}`
             }
         })
         res.send(formatRes);
@@ -124,26 +125,28 @@ exports.checkoutVehicle = (req, res) => {
 
 exports.getVehiclesByDate = (req, res) => {
     const { dateFrom, dateTo } = req.params;
-    const convertDateForm = new Date(dateFrom+"00:00:00")
-    const convertDateTo = new Date(dateTo + "23:59:59")
-    const query =  `SELECT id, license_plate, entry_time, exit_time, is_parked 
+    const convertDateForm = new Date(dateFrom + " 00:00:00")
+    const convertDateTo = new Date(dateTo + " 23:59:59")
+    const query =  `SELECT id, license_plate, entry_time, exit_time, is_parked, total_fee 
         FROM vehicles 
          WHERE entry_time >= ? 
         AND entry_time <= ?`;
     connection.query(query, [convertDateForm, convertDateTo], (err, results) => {
+        
         if (err) {
             return res.status(500).send(err);
         }
-        const format= results.map((vehicle) => {
+        const formatRes= results.map((vehicle) => {
             return {
                 id: vehicle.id,
                 license_plate: vehicle.license_plate,
                 entry_time: moment(vehicle.entry_time).format("DD-MM-YYYY HH:mm:ss"),
                 exit_time: vehicle.exit_time ? moment(vehicle.exit_time).format("DD-MM-YYYY HH:mm:ss") : "-",
-                is_parked: vehicle.is_parked
+                is_parked: vehicle.is_parked,
+                total_fee: `Rp ${formatNumber(vehicle.total_fee)}`
             }
         })
-        res.send(format);
+        res.send(formatRes);
     });
   };
 
