@@ -32,8 +32,8 @@ jobs:
     - name: Build and push Docker image
       run: |
         echo "step Build"
-        docker build -t gedharizka/parking-app:0.0.2 .
-        docker push gedharizka/parking-app:0.0.2
+        docker build -t gedharizka/parking-app:0.0.3 .
+        docker push gedharizka/parking-app:0.0.3
         echo "==== Success ===="
         
     - name: Log out from DockerHub
