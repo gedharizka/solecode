@@ -93,7 +93,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":\"2\"\r\n}",
+					"raw": "{\r\n    \"id\":\"49\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -125,7 +125,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"capacity\":\"10\"\r\n}",
+					"raw": "{\r\n    \"capacity\":\"15\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

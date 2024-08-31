@@ -56,7 +56,7 @@ exports.addVehicle = (req, res) => {
 };
 
 exports.getParkedVehicles = (req, res) => {
-    const query = 'SELECT  id, license_plate, entry_time, exit_time, is_parked, total_fee FROM vehicles WHERE is_parked = true ORDER BY id DESC';
+    const query = 'SELECT  id, license_plate, entry_time, exit_time, is_parked, total_fee FROM vehicles WHERE is_parked = 1 ORDER BY id DESC';
     connection.query(query, (err, results) => {
         if (err) {
             return res.status(500).send(err);

@@ -30,3 +30,11 @@
 ```bash
   npm run start
 ```
+
+## Video
+[Testing soal No 1](https://youtu.be/-fPvM4vZhtI)
+
+[Testing soal No 2](https://youtu.be/4EPtBwS9ZyM)
+
+[Github CI](https://youtu.be/Dp_-bTpDQNE)
+
