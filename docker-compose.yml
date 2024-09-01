@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  parking-app:
+    image: node:lts-alpine
+    container_name: test-solecode-app
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: dockerfile
+    volumes:
+      - .:/app
+    command: npm run start
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
