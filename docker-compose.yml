@@ -15,3 +15,15 @@ services:
       - .env
     ports:
       - "3000:3000"
+    depends_on:
+    - db-mysql
+
+  db-mysql:
+    image: mysql/mysql-server:5.7
+    container_name: test-solecode-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: parking_db
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "3306:3306"
