@@ -2,7 +2,7 @@
 
 1. Clone repository
 ```bash
-  git clone https://github.com/gedharizka/terraform.git
+  git clone https://github.com/gedharizka/solecode.git
 ```
 
 2. Install depedencies
